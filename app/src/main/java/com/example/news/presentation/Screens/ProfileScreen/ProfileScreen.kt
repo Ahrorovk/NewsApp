@@ -19,12 +19,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import com.example.news.Constants
 import com.example.news.presentation.Screens.HomeScreen.components.HomeScreenTopAppBar
 
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun ProfileScreen(navController: NavController, viewModel: MainViewModel) {
+    LaunchedEffect(key1 = true){
+        Constants.favoriteScreen.value = false
+        Constants.homeScreen.value = false
+    }
     var liveDateString = MutableLiveData<String>()
     var Username by remember { mutableStateOf("") }
     var Email by remember { mutableStateOf("") }

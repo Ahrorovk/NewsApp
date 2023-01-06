@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import com.example.news.Constants
 import com.example.news.Constants.api_key_from_GNews
 import com.example.news.presentation.Screens.CurrencyScreen.components.CustomGNewsScreenBox
 import com.example.news.presentation.Screens.HomeScreen.components.HomeScreenTopAppBar
@@ -35,6 +36,10 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CurrencyScreen(navController:NavController,viewModel: MainViewModel) {
+    LaunchedEffect(key1 = true){
+        Constants.favoriteScreen.value = false
+        Constants.homeScreen.value = false
+    }
     val stateSearchClick = viewModel.stateSearchClick
     val stateGetCurrency = viewModel.stateGetCurrency
     val context = LocalContext.current

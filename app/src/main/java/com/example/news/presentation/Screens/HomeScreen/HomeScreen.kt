@@ -9,6 +9,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.news.Constants.bool
+import com.example.news.Constants.homeScreen
 import com.example.news.Screen
 import com.example.news.presentation.Screens.HomeScreen.components.*
 import com.example.news.presentation.Screens.HomeScreen.components.ListOfCategory.AMAZON
@@ -41,6 +43,9 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 @Composable
 fun HomeScreen(navController: NavController,viewModel: MainViewModel) {
     bool = true
+    LaunchedEffect(key1 = true){
+        homeScreen.value = true
+    }
     val context = LocalContext.current
     val stateGetNewsAndroid = viewModel.stateGetNewsAndroid
     val state = rememberSwipeRefreshState(stateGetNewsAndroid.value.isLoading)
@@ -60,8 +65,11 @@ fun HomeScreen(navController: NavController,viewModel: MainViewModel) {
                 navController = navController,
                 username = viewModel.username.value,
                 phoneNumber = viewModel.phoneNumber.value,
-                iconButtononClick = {
+                iconButtonOnClick = {
                     navController.navigate(Screen.CURRENCY_SCREEN.route)
+                },
+                profileButtonOnClick = {
+                    navController.navigate(Screen.PROFILE_SCREEN.route)
                 }
                 )
         },

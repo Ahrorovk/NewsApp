@@ -23,9 +23,11 @@ import androidx.navigation.NavController
 @Composable
 fun HomeDrawer(
     navController: NavController,
-               username:String,
-               phoneNumber:String,
-               iconButtononClick:()->Unit){
+    username:String,
+    phoneNumber:String,
+    iconButtonOnClick:()->Unit,
+    profileButtonOnClick:()->Unit
+){
     Column() {
         Box(
             modifier = Modifier
@@ -62,7 +64,7 @@ fun HomeDrawer(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.CenterEnd
                 ) {
-                    IconButton(onClick = { iconButtononClick() }) {
+                    IconButton(onClick = { iconButtonOnClick() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowForward,
                             contentDescription = null,
@@ -75,7 +77,7 @@ fun HomeDrawer(
     }
     LazyColumn() {
         item {
-            OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {}) {
+            OutlinedButton(modifier = Modifier.fillMaxWidth(), onClick = {profileButtonOnClick()}) {
                 Box(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.CenterStart
@@ -89,7 +91,7 @@ fun HomeDrawer(
                             contentDescription = null
                         )
                         Spacer(modifier = Modifier.width(24.dp))
-                        Text(text = "Sticker shops")
+                        Text(text = "Profile")
                     }
                 }
             }
