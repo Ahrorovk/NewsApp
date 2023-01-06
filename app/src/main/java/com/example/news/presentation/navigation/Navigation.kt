@@ -13,6 +13,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.news.Constants.bool
+import com.example.news.Constants.favoriteScreen
+import com.example.news.Constants.homeScreen
 import com.example.news.Screen
 import com.example.news.presentation.Screens.CurrencyScreen.CurrencyScreen
 import com.example.news.presentation.Screens.HomeScreen.HomeScreen
@@ -30,7 +32,7 @@ fun Navigation(viewModel: MainViewModel,context: Context) {
     val currentDestination = navBackStackEntry?.destination
     Scaffold(
         bottomBar = {
-            if (currentDestination?.isCurrentDestinationHasBottomSheet() == true) {
+            if (homeScreen.value || favoriteScreen.value) {
                     BottomBar(navController = navController)
             }
         }
@@ -50,7 +52,7 @@ fun Navigation(viewModel: MainViewModel,context: Context) {
     }
 }
 private fun NavDestination.isCurrentDestinationHasBottomSheet() =
-    parent?.route != Screen.INFO_SCREEN.route && parent?.route == Screen.PROFILE_SCREEN.route
+    parent?.route != Screen.CURRENCY_SCREEN.route && parent?.route != Screen.INFO_SCREEN.route
 
 private fun NavDestination.isCurrentDestinationHasTopBar() =
     (parent?.route == Screen.HOME_SCREEN.route ||

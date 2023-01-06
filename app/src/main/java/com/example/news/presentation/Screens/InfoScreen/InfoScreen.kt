@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.news.Constants
 import com.example.news.presentation.Screens.HomeScreen.components.ListOfCategory
 import com.example.news.presentation.Screens.InfoScreen.components.CustomInfoScreenBox
 import com.example.news.presentation.Screens.InfoScreen.components.LoadingIndicator
@@ -30,6 +31,10 @@ import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun InfoScreen(navController: NavController,context:Context,viewModel: MainViewModel) {
+    LaunchedEffect(key1 = true){
+        Constants.favoriteScreen.value = false
+        Constants.homeScreen.value = false
+    }
     val stateGetNewsAndroid = viewModel.stateGetNewsAndroid
     val state = rememberSwipeRefreshState(stateGetNewsAndroid.value.isLoading)
     val getNewsFromServer = stateGetNewsAndroid.value.response

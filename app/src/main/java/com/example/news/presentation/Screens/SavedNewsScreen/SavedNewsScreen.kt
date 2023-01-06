@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.news.Constants
 import com.example.news.Constants.bool
 import com.example.news.presentation.Screens.HomeScreen.components.HomeScreenTopAppBar
 import com.example.news.presentation.Screens.InfoScreen.components.CustomInfoScreenBox
@@ -22,6 +23,9 @@ import com.example.news.domain.NewsDatabase.NewsDatabase
 @Composable
 fun SavedNewsScreen(navController: NavController, context:Context, viewModel: MainViewModel) {
     bool = true
+    LaunchedEffect(key1 = true){
+        Constants.favoriteScreen.value = true
+    }
     val listOfNews = viewModel.listOfNews
     var new = viewModel.newsDatabase
     val iconFavoriteBool = viewModel.iconFavoriteBool
