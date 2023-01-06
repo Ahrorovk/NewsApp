@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.room:room-compiler-processing:2.4.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-compiler-processing/2.4.3/94deadc9e79a375f6ad45494fada38e1915783de/room-compiler-processing-2.4.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-compiler-processing/2.4.3/491965fea45c14ab6af8fa60fb2d7b2e5eb6167e/room-compiler-processing-2.4.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
