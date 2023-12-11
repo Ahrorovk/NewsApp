@@ -1,4 +1,4 @@
-package com.ahrorovk.news.data.remote
+package com.ahrorovk.news.domain
 
 import kotlinx.coroutines.flow.Flow
 

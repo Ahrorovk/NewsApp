@@ -2,6 +2,7 @@ package com.ahrorovk.news.data
 
 import com.ahrorovk.news.data.remote.InfoApi
 import com.ahrorovk.news.domain.Gnews.Gnews
+import com.ahrorovk.news.domain.NewsRepository
 
 class InfoRepositoryImpl(
     private val api: InfoApi

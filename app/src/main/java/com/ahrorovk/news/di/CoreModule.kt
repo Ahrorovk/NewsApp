@@ -2,9 +2,9 @@ package com.ahrorovk.news.di
 
 import android.content.Context
 import com.ahrorovk.news.core.Constants
-import com.ahrorovk.news.core.DataStoreManager
+import com.ahrorovk.news.data.local.DataStoreManager
 import com.ahrorovk.news.data.InfoRepositoryImpl
-import com.ahrorovk.news.data.NewsRepository
+import com.ahrorovk.news.domain.NewsRepository
 import com.ahrorovk.news.data.remote.InfoApi
 import dagger.Module
 import dagger.Provides

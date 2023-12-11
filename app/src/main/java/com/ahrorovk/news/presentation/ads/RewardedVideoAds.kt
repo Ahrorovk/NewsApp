@@ -66,8 +66,7 @@ fun showRewardedAd(context: Context, onDone: (Int) -> Unit, onNotReadyYet: () ->
         return
     }
     val activity = context.findActivity()
-    if (mInterstitialAd != null && activity != null && adCount % 5 == 4) {
-        adCount++
+    if (mInterstitialAd != null && activity != null) {
         isShowingRewardedAd = true
         val activity: Activity? = context.findActivity()
         activity?.let {

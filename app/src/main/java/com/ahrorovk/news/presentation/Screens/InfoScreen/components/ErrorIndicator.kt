@@ -31,7 +31,7 @@ fun ErrorIndicator(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Произошла какая-то ошибка.$error",
+                    text = "$error",
                     textAlign = TextAlign.Center,
                     color = Color.Red
                 )

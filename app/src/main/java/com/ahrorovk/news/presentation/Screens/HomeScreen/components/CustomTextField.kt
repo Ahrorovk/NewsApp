@@ -48,7 +48,7 @@ fun CustomTextField(
         },
         trailingIcon = {
             if(value!="") {
-                IconButton(onClick = { setSearch("---") }) {
+                IconButton(onClick = { setSearch("") }) {
                     Icon(imageVector = Icons.Default.Close, contentDescription =null )
                 }
             }

@@ -2,7 +2,7 @@ package com.ikcollab.handyhelper.app.presentation.languages
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ahrorovk.news.core.DataStoreManager
+import com.ahrorovk.news.data.local.DataStoreManager
 import com.ahrorovk.news.presentation.Screens.SettingsScreen.LanguagesEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*

@@ -25,19 +25,26 @@ fun LanguagesScreen(
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
                     .padding(vertical = 8.dp),
-                text = "Languages",
+                text = if (state.selectedLanguage.shortCut == "ru") "Языки" else "Languages",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = MaterialTheme.colors.onBackground
             )
             LazyColumn() {
                 items(state.languages) {
-                    LanguageItem(name = it.name, isActive = it.id == state.selectedLanguage.id) {
+                    LanguageItem(
+                        name = it.getByType(state.selectedLanguage.shortCut),
+                        isActive = it.id == state.selectedLanguage.id
+                    ) {
                         onEvent(LanguagesEvent.OnLanguageItemClick(it.shortCut))
                     }
                 }
-                item{
-                    Divider(modifier=Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp))
+                item {
+                    Divider(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp, vertical = 8.dp)
+                    )
                 }
             }
         }

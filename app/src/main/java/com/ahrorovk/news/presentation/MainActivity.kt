@@ -3,15 +3,23 @@ package com.ahrorovk.news.presentation
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import com.ahrorovk.news.core.DataStoreManager
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
+import com.ahrorovk.news.core.getCurrentLanguage
+import com.ahrorovk.news.data.local.DataStoreManager
 import com.ahrorovk.news.presentation.Screens.MainViewModel
 import com.ahrorovk.news.presentation.ads.loadInterstitial
+import com.ahrorovk.news.presentation.ads.loadRewardedVideoAd
 import com.ahrorovk.news.presentation.navigation.Navigation
 import com.ahrorovk.news.ui.theme.NewsTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -33,11 +41,20 @@ class MainActivity : ComponentActivity(), CoroutineScope {
             println("Exception $throwable in context:$coroutineContext")
         }
 
-    @SuppressLint("StateFlowValueCalledInComposition")
+    @SuppressLint("StateFlowValueCalledInComposition", "CoroutineCreationDuringComposition")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         job = Job()
+        dataStoreManager.getLanguageState.onEach {
+            if (it == 0) {
+                if (getCurrentLanguage(this) == "ru")
+                    dataStoreManager.updateLanguage(getCurrentLanguage(this))
+                else
+                    dataStoreManager.updateLanguage("en")
+                dataStoreManager.updateLanguageState(1)
+            }
+        }.launchIn(this)
         dataStoreManager.getLanguageId.onEach {
             val locale = Locale(it)
             Locale.setDefault(locale)
@@ -49,9 +66,20 @@ class MainActivity : ComponentActivity(), CoroutineScope {
 
         MobileAds.initialize(this@MainActivity) {}
         loadInterstitial(this)
+        loadRewardedVideoAd(this)
         setContent {
-            val viewModel by viewModels<MainViewModel>()
             NewsTheme {
+                val viewModel by viewModels<MainViewModel>()
+                val systemUiController = rememberSystemUiController()
+                val isDarkTheme = MaterialTheme.colors.isLight
+                systemUiController.setSystemBarsColor(
+                    color = MaterialTheme.colors.primaryVariant
+                )
+                val scope = rememberCoroutineScope()
+                scope.launch {
+                    dataStoreManager.updateDarkThemeState(!isDarkTheme)
+                }
+
                 Navigation()
             }
         }

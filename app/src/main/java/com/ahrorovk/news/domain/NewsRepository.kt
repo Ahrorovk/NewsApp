@@ -1,4 +1,4 @@
-package com.ahrorovk.news.data
+package com.ahrorovk.news.domain
 
 import com.ahrorovk.news.domain.Gnews.Gnews
 

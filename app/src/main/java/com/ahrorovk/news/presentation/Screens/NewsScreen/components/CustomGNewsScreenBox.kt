@@ -1,7 +1,8 @@
-package com.ahrorovk.news.presentation.Screens.CurrencyScreen.components
+package com.ahrorovk.news.presentation.Screens.NewsScreen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,25 +17,26 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.ahrorovk.news.core.formattedDate
-import com.ahrorovk.news.presentation.Screens.CurrencyScreen.HyperlinkText
 
 @Composable
 fun CustomGNewsScreenBox(
     author: String,
-    time: String,
     date: String,
     title: String,
     imageUrl: String,
     content: String,
     timeOfAdd: Boolean = false,
-    textOfTimeOfAdd: String = ""
+    textOfTimeOfAdd: String = "",
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -102,20 +104,23 @@ fun CustomGNewsScreenBox(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    modifier = Modifier.fillMaxWidth(0.6f),
+                    modifier = Modifier
+                        .fillMaxWidth(0.6f)
+                        .clickable { onClick.invoke() },
                     text = author,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                )
-                HyperlinkText(
-                    fullText = author,
-                    linkText = listOf(author),
-                    fontSize = 12.sp,
-                    linkTextFontWeight = FontWeight.Medium,
-                    hyperlinks = listOf(time)
+                    color = Color.Blue,
+                    style = MaterialTheme.typography.body1
                 )
             }
             Spacer(modifier = Modifier.padding(5.dp))
         }
     }
 }
+
+fun Modifier.underline() = this.then(
+    Modifier
+        .background(Color.Blue)
+        .height(2.dp)
+)
